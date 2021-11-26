@@ -8,5 +8,12 @@
 </head>
 <body>
 <h1>Olá mundo</h1>
+<table>
+	<tr>
+		<th>Tabela</th>
+		<td>Linha</td>
+	</tr>
+</table>
+
 </body>
 </html>
