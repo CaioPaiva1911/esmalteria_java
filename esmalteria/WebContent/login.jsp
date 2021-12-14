@@ -42,7 +42,7 @@
 		<!-- Remind Passowrd -->
 		<div id="formFooter">
 			<a class="underlineHover text-left" href="#">Esqueceu sua senha?</a>
-			<a class="underlineHover text-info text-right" href="#">Cadastra-se</a>
+			<a class="underlineHover text-info text-right" href="testeUsuarios.jsp">Cadastra-se</a>
 		</div>
 		<p align="center" class="text-alert mt-2">
 			<%
