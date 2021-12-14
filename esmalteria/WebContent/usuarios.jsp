@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -20,23 +21,44 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	</script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
 <meta charset="UTF-8">
 <link href="css/estilos.css" rel="stylesheet">
 <title>Lista de Usuários</title>
+
+<!-- AJAX -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url: "ajax/listar.jsp",
+			method: "post",
+			data: $('#frm').serialize(),
+			dataType: "html",
+			succcess: function(result){
+				$('#listar').html(result);
+			}
+		})	
+	})
+</script>
+
+
 </head>
 <body>
 	<%
-		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
 	%>
@@ -86,66 +108,20 @@
 			<a type="button" class="btn-info btn-sm ml-3"
 				href="usuarios.jsp?funcao=novo">Novo Usuário</a>
 			<form class="form-inline my-2 my-lg-0 direita" method="GET">
-				<input class="form-control form-control-sm mr-sm-2" type="search"
+				<input class="form-control form-control-sm mr-sm-2" type="search" 
 					name="txtbuscar" placeholder="Buscar pelo nome" aria-label="Search">
-				<button class="btn btn-outline-info btn-sm my-2 my-sm-0"
-					type="submit" name="btn-buscar">Buscar</button>
+				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="submit" id="btn-buscar" name="btn-buscar">Buscar</button>
+				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="button" id="btn-teste" name="btn-teste">Teste</button>
 			</form>
 		</div>
-		<table class="table table-sm table-striped">
-			<thead>
-				<tr>
-					<th scope="col">Código</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Email</th>
-					<th scope="col">Senha</th>
-					<th scope="col">Nível Usuário</th>
-					<th scope="col">Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					try {
-
-						st = new Conexao().conectar().createStatement();
-						if(request.getParameter("btn-buscar") != null){
-							
-							String busca = '%' + request.getParameter("txtbuscar") + '%';
-							
-							rs = st.executeQuery("SELECT idUsuario, nome, email, senha, idNivelUsuario FROM usuarios WHERE nome LIKE '" + busca + "' ORDER BY nome;");
-						
-						}else{
-							rs = st.executeQuery("SELECT idUsuario, nome, email, senha, idNivelUsuario FROM usuarios ORDER BY nome");
-						}
-
-						while (rs.next()) {
-				%>
-				<tr>
-					<td><%=rs.getString(1)%></td>
-					<td><%=rs.getString(2)%></td>
-					<td id="senha"><%=rs.getString(3)%></td>
-					<td><%= rs.getString(4)%></td>
-					<td><%= rs.getString(5).equals("1") ? "Admin" : "Comum"%></td>
-					<td><a
-						href="<%=pag %>?funcao=editar&id=<%=rs.getString(1)%>"
-						class="text-info"><i class="far fa-edit"></i></a> <a
-						href="<%=pag %>?funcao=excluir&id=<%=rs.getString(1)%>"
-						class="text-danger"><i class="far fa-trash-alt"></i></a></td>
-				</tr>
-				<%
-					}
-
-					} catch (Exception e) {
-						out.print(e);
-					}
-				%>
-
-
-			</tbody>
-		</table>
+		<div id="listar">
+			
+		</div>
 	</div>
 </body>
 </html>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1"
@@ -235,7 +211,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Save User-->
 <%
 	if(request.getParameter("btn-salvar") != null ){
 		String senha = request.getParameter("txtsenha");
@@ -336,3 +312,6 @@
 
 	}
 %>
+
+
+
