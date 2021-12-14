@@ -55,12 +55,12 @@
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<span><small> <%
- 	String nomeUsuario = (String) session.getAttribute("nomeUsuario");
- 	out.print(nomeUsuario);
+ //	String nomeUsuario = (String) session.getAttribute("nomeUsuario");
+// 	out.print(nomeUsuario);
 
- 	if (nomeUsuario == null) {
- 		response.sendRedirect("login.jsp");
- 	}
+// 	if (nomeUsuario == null) {
+// 		response.sendRedirect("login.jsp");
+ //	}
  %>
 					</small></span> <a href="logout.jsp"><i class="fas fa-sign-out-alt ml-1"></i></a>
 				</form>
