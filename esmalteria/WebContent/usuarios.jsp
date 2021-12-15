@@ -34,7 +34,7 @@
 	crossorigin="anonymous">
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
 
 <meta charset="UTF-8">
 <link href="css/estilos.css" rel="stylesheet">
@@ -91,10 +91,9 @@
 			<a type="button" class="btn-info btn-sm ml-3"
 				href="usuarios.jsp?funcao=novo">Novo Usuário</a>
 			<form class="form-inline my-2 my-lg-0 direita" method="GET">
-				<input class="form-control form-control-sm mr-sm-2" type="search" 
-					name="txtbuscar" placeholder="Buscar pelo nome" aria-label="Search">
-				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="submit" id="btn-buscar" name="btn-buscar">Buscar</button>
-				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="button" id="btn-teste" name="btn-teste">Teste</button>
+				<input class="form-control form-control-sm mr-sm-2" type="search"  
+					name="txtbuscar" id="txtbuscar" placeholder="Buscar pelo nome" aria-label="Search">
+				<button class="btn btn-outline-info btn-sm my-2 my-sm-0 d-none d-md-block" type="submit" id="btn-buscar" name="btn-buscar">Buscar</button>
 			</form>
 		</div>
 		<div id="listar">
@@ -104,20 +103,48 @@
 </body>
 </html>
 
-<!-- AJAX -->
+<!-- AJAX BUSCAR DADOS-->
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
 			url: "ajax/listar.jsp",
 			type: "GET",	
 			data: $('#frm').serialize(),
-			//dataType: "html",
+			dataType: "html",
 			success: function(result){
 				$('#listar').html(result);
 				//console.log(response);
 			}
 		})	
 	})
+</script>
+
+
+<!-- AJAX BUSCAR DADOS-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn-buscar").click(function(event){
+			event.preventDefault();
+			$.ajax({
+				url: "ajax/listar.jsp",
+				method: "post",	
+				data: $('form').serialize(),
+				dataType: "html",
+				success: function(result){
+					$('#listar').html(result);
+					//console.log(response);
+				}
+			})	
+		})
+			
+	})
+</script>
+
+<!-- AJAX PARA BUSCAR DADOS PELA TXT -->
+<script type="text/javascript">
+	$("#txtbuscar").keyup(function(){
+		$('#btn-buscar').click();
+	})		
 </script>
 
 <!-- Modal -->
@@ -309,6 +336,8 @@
 
 	}
 %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
 
 
