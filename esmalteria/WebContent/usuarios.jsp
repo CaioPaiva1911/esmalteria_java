@@ -39,23 +39,6 @@
 <meta charset="UTF-8">
 <link href="css/estilos.css" rel="stylesheet">
 <title>Lista de Usuários</title>
-
-<!-- AJAX -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		$.ajax({
-			url: "ajax/listar.jsp",
-			method: "post",
-			data: $('#frm').serialize(),
-			dataType: "html",
-			succcess: function(result){
-				$('#listar').html(result);
-			}
-		})	
-	})
-</script>
-
-
 </head>
 <body>
 	<%
@@ -121,7 +104,21 @@
 </body>
 </html>
 
-
+<!-- AJAX -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url: "ajax/listar.jsp",
+			type: "GET",	
+			data: $('#frm').serialize(),
+			//dataType: "html",
+			success: function(result){
+				$('#listar').html(result);
+				//console.log(response);
+			}
+		})	
+	})
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1"

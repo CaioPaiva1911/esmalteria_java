@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
+import model.Usuario;
 
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet("/usuarios")
+@WebServlet("/usuarios/*")
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +30,25 @@ public class UsuarioController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String url = request.getRequestURI();
+		String acao = url.substring(url.lastIndexOf("/") + 1);
+		
+		switch(acao)
+		{
+		case "listar":
+				response.setContentType("text/html; charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
+				
+				Usuario usuario = new Usuario();
+				
+				String result = usuario.listarJSON();
+				System.out.println(result);
+				response.getWriter().write(result);
+			break;
+			
+			default:
+			break;
+		}
 	}
 
 	/**
@@ -68,10 +86,8 @@ public class UsuarioController extends HttpServlet {
 			} 
 		}
 		
-		String saida = new UsuarioDAO().listAll();
-		response.getWriter().write(saida);
-		
-		
+		String saida = new UsuarioDAO(idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,  endereco, bairro,  cidade, uf,  cep,  telefone, foto, ativo).listAll();
+		response.getWriter().write(saida);		
 	}
 
 }

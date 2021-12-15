@@ -1,5 +1,13 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import database.DB;
+
 //import java.sql.ResultSet;
 //import java.sql.SQLException;
 
@@ -7,21 +15,23 @@ package model;
 
 public class Usuario {
 
-	private int idUsuario;
-	private String email;
-	private String senha;
-	private int idNivelUsuario;
-	private String nome;
-	private String cpf;
-	private String endereco;
-	private String bairro;
-	private String cidade;
-	private String uf;
-	private String cep;
-	private String telefone;
-	private String foto;
-	private String ativo;
+	private int idUsuario = 0;
+	private String email = "";
+	private String senha = "";
+	private int idNivelUsuario = 0;
+	private String nome = "";
+	private String cpf = "";
+	private String endereco = "";
+	private String bairro = "";
+	private String cidade = "";
+	private String uf = "";
+	private String cep = "";
+	private String telefone = "";
+	private String foto = "";
+	private String ativo = "";
 
+	
+	/*
 	public Usuario(int idUsuario, String email, String senha, int idNivelUsuario, String nome, String cpf,
 			String endereco, String bairro, String cidade, String uf, String cep, String telefone, String foto,
 			String ativo) {
@@ -64,6 +74,39 @@ public class Usuario {
 		this.setFoto(foto);
 		this.setAtivo(ativo);
 
+	}
+	*/
+	
+	public String listarJSON()
+	{	
+		ResultSet rs = DB.executarQuery("SELECT * FROM lojinha.usuarios;");
+				
+		
+		JsonObject json = new JsonObject();
+		JsonArray array = new JsonArray();
+		
+		try {
+			int i = 0;
+			while(rs.next()) 
+			{										
+				JsonObject item = new JsonObject();
+							
+				item.addProperty("idUsuario", rs.getString("idUsuario"));
+				item.addProperty("nome", rs.getString("nome"));
+				item.addProperty("email", rs.getString("email"));
+				item.addProperty("senha", rs.getString("senha"));
+				item.addProperty("idNivelUsuario", rs.getString("idNivelUsuario"));
+				i++;
+				array.add(item);
+			}	
+			//json.addProperty("Teste", 123);
+			
+			json.add("0",array);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return json.toString();
 	}
 	
 	public int getIdUsuario() {

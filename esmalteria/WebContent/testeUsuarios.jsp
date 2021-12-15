@@ -57,6 +57,8 @@
 		} 
 	}
 	
+	/*idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,  endereco, bairro,  cidade, uf,  cep,  telefone, foto, ativo*/
+	
 	String saida = new UsuarioDAO().listAll();
 	response.getWriter().write(saida);
 %>
