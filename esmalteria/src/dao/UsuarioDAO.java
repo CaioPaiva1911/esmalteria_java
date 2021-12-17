@@ -128,6 +128,36 @@ public class UsuarioDAO extends Usuario {
 		return (saida);
 	}
 	
+	public ResultSet login(String email, String senha)
+	{
+		
+		try {
+			ResultSet rs = DB.executarQuery("SELECT idUsuario, email, senha, idNivelUsuario, nome FROM usuarios where email = '" + email + "' AND senha = '" + senha + "'");
+			String sql = "SELECT idUsuario, email, senha, idNivelUsuario, nome FROM usuarios where email = '" + email + "' AND senha = '" + senha + "'";
+			System.out.println(sql);
+			if(rs != null){
+				return rs;
+			}
+		} catch (Exception e) {
+			System.out.print(e);
+		}
+		return null;
+				/*
+				if (usuario == null || senha == null) {
+					out.println("Preencha os dados.");
+				} else {
+					if (i > 0) {
+						session.setAttribute("nomeUsuario", nomeUsuario);
+						//out.println(usuario);
+						response.sendRedirect("usuarios.jsp");
+					} else {
+						out.println("Dados incorretos!");
+					}
+				}
+				*/
+	}
+	
+	
 	
 	
 }
