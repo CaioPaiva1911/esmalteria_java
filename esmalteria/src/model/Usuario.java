@@ -79,16 +79,16 @@ public class Usuario {
 	
 	public String listarJSON()
 	{	
-		ResultSet rs = DB.executarQuery("SELECT * FROM lojinha.usuarios;");
-				
+		ResultSet rs = DB.executarQuery("SELECT * FROM lojinha.usuarios;");	
 		
 		JsonObject json = new JsonObject();
 		JsonArray array = new JsonArray();
-		
+		int i = 0;
 		try {
-			int i = 0;
+			
 			while(rs.next()) 
-			{										
+			{	
+				
 				JsonObject item = new JsonObject();
 							
 				item.addProperty("idUsuario", rs.getString("idUsuario"));

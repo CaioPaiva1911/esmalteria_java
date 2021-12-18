@@ -56,8 +56,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+						aria-current="page" href="#">Página inicial</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +69,7 @@
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
 						</ul></li>
-					<li class="nav-item"><a class="nav-link disabled">Disabled</a>
+					<li class="nav-item"><a class="nav-link disabled">Desabilitado</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0 direita">
@@ -213,6 +213,7 @@
 					<div class="form-group">
 						<label for="txtnivel">Nível Usuário</label> <select
 							class="form-control" name="txtnivel" id="txtnivel" required>
+						<option value=""></option>
 							<option value="<%=xnivel %>"><%= xnivel.equals("1") ? "Admin" : "Comum"%></option> 
 							<%
 								if(xnivel.equals("1")){
@@ -267,6 +268,7 @@
 %>
 
 
+<!-- Delete User -->
 <%
 
 	if(request.getParameter("funcao") != null && request.getParameter("funcao").equals("excluir")){

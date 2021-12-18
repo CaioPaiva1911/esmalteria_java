@@ -28,34 +28,7 @@
 	}
 </style>
 
-<script>
-	$(document).ready(function(){
-		$("#btnUsuarios").click(function(){
-			
-			txtidUsuario = $("#idUsuario").val();
-			txtemail 	= $("#email").val();
-			txtsenha 	= $("#senha").val();
-			txtidNivelUsuario = "1";
-			txtnome 	= $("#nome").val();
-			txtcpf 	= $("cpf").val();
-			txtendereco = $("#endereco").val();
-			txtbairro 	= $("#bairro").val();
-			txtcidade 	= $("#cidade".val());
-			txtuf 		= $("#uf").val();
-			txtcep 	= $("#cep").val();
-			txttelefone = $("#telefone").val();
-			txtfoto 	= $("#foto").val();
-			txtativo 	= "N";
-			txtacao 	= $("#acao").val();
-			
-			$.post("usuarios", {idUsuario: txtidUsuario, nome: txtnome, email: txtemail, senha: txtsenha, idNivelUsuario: txtidNivelUsuario,
-				cpf: txtcpf, endereco: txtendereco, bairro: txtbairro, cidade: txtcidade, uf: txtuf, 
-				cep: txtcep, telefone: txttelefone, foto: txtfoto, ativo: txtativo, acao: txtacao}, function(data, status){
-					window.alert(data);
-				});
-		});		
-	});
-</script>
+
 
 </head>
 <body>
@@ -153,13 +126,61 @@
 		<input type="text" id="foto"  name="foto" placeholder="Enter foto" class="form-control" >
 	</div>
 
-	<input type="hidden" name="acao" value="0"> 
+	<input type="hidden" name="acao" id="acao" value="0"> 
 	
-	<button type="button" id="btnUsuarios" class="btn btn-primary" onclick="acao.value='1' ; this.form.submit();">Salvar</button>	
-	<button type="button" id="btnUsuarios" class="btn btn-primary" onclick="acao.value='2' ; this.form.submit();">Excluir</button>	
+	<button type="button" id="btnCadastrar" class="btn btn-primary">Salvar</button>	
+	<button type="button" id="btnDeletar" class="btn btn-primary">Excluir</button>	
 	
 </form>
-
-
 </body>
+
+<script>
+	function acao(number){
+		$("#acao").val(number);
+		btn();
+	}
+
+	function btn(){
+		txtidUsuario = $("#idUsuario").val();
+		txtemail 	= $("#email").val();
+		txtsenha 	= $("#senha").val();
+		txtidNivelUsuario = "1";
+		txtnome 	= $("#nome").val();
+		txtcpf 	= $("cpf").val();
+		txtendereco = $("#endereco").val();
+		txtbairro 	= $("#bairro").val();
+		txtcidade 	= $("#cidade").val();
+		txtuf 		= $("#uf").val();
+		txtcep 	= $("#cep").val();
+		txttelefone = $("#telefone").val();
+		txtfoto 	= $("#foto").val();
+		txtativo 	= "N";
+		txtacao 	=  $("#acao").val();
+		
+		$.post("usuarios/create", 
+			{idUsuario: txtidUsuario, nome: txtnome, email: txtemail, senha: txtsenha,
+			 idNivelUsuario: txtidNivelUsuario,
+			cpf: txtcpf, endereco: txtendereco, bairro: txtbairro, cidade: txtcidade, uf: txtuf, 
+			cep: txtcep, telefone: txttelefone, foto: txtfoto, ativo: txtativo, acao: txtacao}, 
+			
+			function(data, status){
+				//window.alert(data);
+			});
+	}
+	
+	$(document).ready(function(){
+			
+		$("#btnCadastrar").click(function(){
+			acao(1);
+		});	
+		
+		$("#btnDeletar").click(function(){
+			acao(2);
+		});		
+
+	});
+	
+</script>
+
 </html>
+
