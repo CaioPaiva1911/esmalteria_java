@@ -38,7 +38,7 @@
 							<a href="view/Index.jsp" class="nav-link text-white">Home</a>
 						</li>
 						<li class="nav-item">
-							<a href="../listarProdutos.jsp"class=" nav-link text-white">Listar Produto</a>
+							<a href="<%=request.getContextPath()%>/listarproduto"class=" nav-link text-white">Listar Produto</a>
 						</li>
 					</ul>
 				</div>
