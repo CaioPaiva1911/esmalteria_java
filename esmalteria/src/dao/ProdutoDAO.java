@@ -7,16 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.StatementImpl;
-
 import model.Produtos;
 
 public class ProdutoDAO {
 	static String timezone = "&useTimezone=true&serverTimezone=UTC";
-	private static String jdbcURL = "jdbc:mysql://localhost:3308/lojinha?"+timezone;
+	private static String jdbcURL = "jdbc:mysql://localhost:3306/lojinha?"+timezone;
 	private static  String jdbcUsername = "root";
-	private static  String jdbcPassword = "10172117";
+	private static  String jdbcPassword = "";
 	
 //	private static final String DELETE = "DELETE FROM produtos WHERE idProduto = ?;";
 	
@@ -101,15 +98,15 @@ public class ProdutoDAO {
 			java.sql.PreparedStatement ps =con.prepareStatement("UPDATE produtos SET fabricante = ?,nome = ?, marca = ?, idCategoria = ?, descricao = ?, unidadeMedida = ?, peso = ?, cor = ? WHERE idProduto = ?"))
 		{
 				
-			ps.setInt(1, produto.getIdProduto());
-			ps.setString(2, produto.getFabricante());
-			ps.setString(3, produto.getNome());
-			ps.setString(4, produto.getMarca());
-			ps.setInt(5, produto.getIdCategoria());
-			ps.setString(6, produto.getDescricao());
-			ps.setString(7, produto.getUnidadeMedida());
-			ps.setDouble(8, produto.getPeso());
-			ps.setString(9, produto.getCor());		
+			ps.setString(1, produto.getFabricante());
+			ps.setString(2, produto.getNome());
+			ps.setString(3, produto.getMarca());
+			ps.setInt(4, produto.getIdCategoria());
+			ps.setString(5, produto.getDescricao());
+			ps.setString(6, produto.getUnidadeMedida());
+			ps.setDouble(7, produto.getPeso());
+			ps.setString(8, produto.getCor());
+			ps.setInt(9, produto.getIdProduto());
 			linha = ps.executeUpdate() > 0;
 			
 		} 

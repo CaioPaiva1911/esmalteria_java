@@ -68,8 +68,13 @@ public class ProdutoController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-		case "/atualizar":
-			atualizarProduto(request, response);
+		case "/atualizarProduto":
+			try {
+				atualizarProduto(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "/editar":
 			editarProduto(request, response);
@@ -124,7 +129,7 @@ public class ProdutoController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
-			 throws ServletException, IOException {
+			 throws ServletException, IOException, SQLException {
 		int idProduto = Integer.parseInt(request.getParameter("idProduto"));
 		String fabricante = request.getParameter("fabricante");
 		String nome = request.getParameter("nome");
@@ -136,13 +141,10 @@ public class ProdutoController extends HttpServlet {
 		String cor = request.getParameter("cor");
 		Produtos produto = new Produtos(idProduto, fabricante, nome, marca,idCategoria,
 				descricao, unidadeMedida, peso, cor);
-		try {
-			produtoDAO.atualizarProduto(produto);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		response.sendRedirect("listarProdutos");
+		
+		produtoDAO.atualizarProduto(produto);
+		
+		response.sendRedirect("listarproduto");
 	}
 }
 	
