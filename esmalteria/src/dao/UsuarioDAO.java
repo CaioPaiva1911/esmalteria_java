@@ -2,6 +2,10 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.google.gson.JsonObject;
+
+import database.DB;
 import database.DBQuery;
 import model.Usuario;
 
@@ -10,17 +14,24 @@ public class UsuarioDAO extends Usuario {
 	private String fieldsName = " idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,  endereco, bairro,  cidade, uf,  cep,  telefone, foto, ativo";
 	private String keyField = "idUsuario";
 	// private String where = "";
-	private DBQuery dbQuery = null;
+	private DBQuery dbQuery;
+	
+	//@Override;
+	public UsuarioDAO(){
+		//super();
+		this.dbQuery = new DBQuery(this.tableName, this.fieldsName, this.keyField);
+		
+	}
 	
 	
 	public UsuarioDAO(int idUsuario, String email, String senha, int idNivelUsuario, String nome, String cpf,
 			String endereco, String bairro, String cidade, String uf, String cep, String telefone, String foto,
 			String ativo) {
-		super(idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,
+		/*super(idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,
 				 endereco,  bairro,  cidade,  uf,  cep,  telefone,  foto,
-				 ativo);
+				 ativo); */
 		this.dbQuery = new DBQuery(this.tableName, this.fieldsName, this.keyField);
-	
+		
 		this.setIdUsuario(idUsuario);
 		this.setEmail(email);
 		this.setSenha(senha);
@@ -35,16 +46,17 @@ public class UsuarioDAO extends Usuario {
 		this.setTelefone(telefone);
 		this.setFoto(foto);
 		this.setAtivo(ativo);
+		
 	}
 
 	public UsuarioDAO(String idUsuario, String email, String senha, String idNivelUsuario, String nome, String cpf,
 			String endereco, String bairro, String cidade, String uf, String cep, String telefone, String foto,
 			String ativo) {
-		super(idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,
+		/*super(idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,
 				 endereco,  bairro,  cidade,  uf,  cep,  telefone,  foto,
-				 ativo);
+				 ativo); */
 		this.dbQuery = new DBQuery(this.tableName, this.fieldsName, this.keyField);
-	
+		
 		this.setIdUsuario(((idUsuario == null) ? 0 : Integer.valueOf(idUsuario)));
 		this.setEmail(email);
 		this.setSenha(senha);
@@ -59,7 +71,7 @@ public class UsuarioDAO extends Usuario {
 		this.setTelefone(telefone);
 		this.setFoto(foto);
 		this.setAtivo(ativo);
-
+		
 	}
 
 
@@ -115,4 +127,37 @@ public class UsuarioDAO extends Usuario {
 		saida += "</table>";
 		return (saida);
 	}
+	
+	public ResultSet login(String email, String senha)
+	{
+		
+		try {
+			ResultSet rs = DB.executarQuery("SELECT idUsuario, email, senha, idNivelUsuario, nome FROM usuarios where email = '" + email + "' AND senha = '" + senha + "'");
+			String sql = "SELECT idUsuario, email, senha, idNivelUsuario, nome FROM usuarios where email = '" + email + "' AND senha = '" + senha + "'";
+			System.out.println(sql);
+			if(rs != null){
+				return rs;
+			}
+		} catch (Exception e) {
+			System.out.print(e);
+		}
+		return null;
+				/*
+				if (usuario == null || senha == null) {
+					out.println("Preencha os dados.");
+				} else {
+					if (i > 0) {
+						session.setAttribute("nomeUsuario", nomeUsuario);
+						//out.println(usuario);
+						response.sendRedirect("usuarios.jsp");
+					} else {
+						out.println("Dados incorretos!");
+					}
+				}
+				*/
+	}
+	
+	
+	
+	
 }

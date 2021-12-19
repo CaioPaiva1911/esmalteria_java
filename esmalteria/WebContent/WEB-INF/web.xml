@@ -9,4 +9,13 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <error-page>
+	<error-code>404</error-code>
+	<location>/index.jsp</location>
+</error-page> 
+  
+  <session-config>
+  	<session-timeout>3600</session-timeout>
+  </session-config>
 </web-app>

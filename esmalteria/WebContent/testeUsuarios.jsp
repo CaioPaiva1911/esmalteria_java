@@ -31,6 +31,7 @@
 
 
 <%
+	
 	String idUsuario = request.getParameter("idUsuario");
 	String email 	= request.getParameter("email");
 	String senha 	= request.getParameter("senha");
@@ -56,6 +57,8 @@
 	usuario.delete();
 		} 
 	}
+	
+	/*idUsuario,  email,  senha,  idNivelUsuario,  nome,  cpf,  endereco, bairro,  cidade, uf,  cep,  telefone, foto, ativo*/
 	
 	String saida = new UsuarioDAO().listAll();
 	response.getWriter().write(saida);

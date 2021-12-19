@@ -3,7 +3,8 @@
 <%@page import="config.Conexao"%>
 
 <%	
-String pag = "usuarios.jsp";
+	String pag = "usuarios.jsp";
+	String buscar = request.getParameter("txtbuscar");
 	Statement st = null;
 	ResultSet rs = null;
 %>
@@ -15,7 +16,7 @@ String pag = "usuarios.jsp";
 	+"<th scope='col'>Nome</th>"
 	+"<th scope='col'>Email</th>"
 	+"<th scope='col'>Senha</th>"
-	+"<th scope='col'>Nível Usuário</th>"
+	+"<th class='d-none d-md-block' scope='col'>Nível Usuário</th>"
 	+"<th scope='col'>Ações</th>"
 +"</tr>"
 +"</thead>"
@@ -24,11 +25,11 @@ String pag = "usuarios.jsp";
 	try {
 
 			st = new Conexao().conectar().createStatement();
-			if(request.getParameter("btn-buscar") != null){
+			if(buscar != null ){
 				
-				String busca = '%' + request.getParameter("txtbuscar") + '%';
+				 buscar = '%' + buscar + '%';
 				
-				rs = st.executeQuery("SELECT idUsuario, nome, email, senha, idNivelUsuario FROM usuarios WHERE nome LIKE '" + busca + "' ORDER BY nome;");
+				rs = st.executeQuery("SELECT idUsuario, nome, email, senha, idNivelUsuario FROM usuarios WHERE nome LIKE '" + buscar + "' ORDER BY nome;");
 			
 			}else{
 				rs = st.executeQuery("SELECT idUsuario, nome, email, senha, idNivelUsuario FROM usuarios ORDER BY nome");
@@ -38,11 +39,11 @@ String pag = "usuarios.jsp";
 	
 			out.print("<tr><td>" + rs.getString(1) + "</td>");
 			out.print("<td>" + rs.getString(2) + "</td>");
-			out.print("<td id='senha'>" + rs.getString(3) + "</td>");
+			out.print("<td style='text-security: disc !important;' id='senha'>" + rs.getString(3) + "</td>");
 			out.print("<td>" + rs.getString(4) + "</td>");
-			out.print("<td>"+(rs.getString(5).equals("1") ? "Admin" : "Comum") + "</td>");
-			out.print("<td><a href='" + pag + "?funcao=editar&id=" + rs.getString(1) + " class='text-info'><i class='far fa-edit'></i></a>"); 
-			out.print("<a href='" + pag + "?funcao=excluir&id=" + rs.getString(1) + " class='text-danger'><i class='far fa-trash-alt'></i></a></td></tr>");
+			out.print("<td class='d-none d-md-block'>"+(rs.getString(5).equals("1") ? "Admin" : "Comum") + "</td>");
+			out.print("<td><a href='" + pag + "?funcao=editar&id=" + rs.getString(1) + "' class='text-info mr-1'><i class='far fa-edit'></i></a>"); 
+			out.print("<a href='" + pag + "?funcao=excluir&id=" + rs.getString(1) + "' class='text-danger'><i class='far fa-trash-alt'></i></a></td></tr>");
 			
 			}
 

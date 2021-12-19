@@ -34,28 +34,11 @@
 	crossorigin="anonymous">
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
 
 <meta charset="UTF-8">
 <link href="css/estilos.css" rel="stylesheet">
 <title>Lista de Usuários</title>
-
-<!-- AJAX -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		$.ajax({
-			url: "ajax/listar.jsp",
-			method: "post",
-			data: $('#frm').serialize(),
-			dataType: "html",
-			succcess: function(result){
-				$('#listar').html(result);
-			}
-		})	
-	})
-</script>
-
-
 </head>
 <body>
 	<%
@@ -73,8 +56,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+						aria-current="page" href="view/Index.jsp">Página inicial</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +69,7 @@
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
 						</ul></li>
-					<li class="nav-item"><a class="nav-link disabled">Disabled</a>
+					<li class="nav-item"><a class="nav-link disabled">Desabilitado</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0 direita">
@@ -98,7 +81,7 @@
 // 		response.sendRedirect("login.jsp");
  //	}
  %>
-					</small></span> <a href="logout.jsp"><i class="fas fa-sign-out-alt ml-1"></i></a>
+					</small></span> <a href="view/logout.jsp"><i class="fas fa-sign-out-alt ml-1"></i></a>
 				</form>
 			</div>
 		</div>
@@ -108,20 +91,74 @@
 			<a type="button" class="btn-info btn-sm ml-3"
 				href="usuarios.jsp?funcao=novo">Novo Usuário</a>
 			<form class="form-inline my-2 my-lg-0 direita" method="GET">
-				<input class="form-control form-control-sm mr-sm-2" type="search" 
-					name="txtbuscar" placeholder="Buscar pelo nome" aria-label="Search">
-				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="submit" id="btn-buscar" name="btn-buscar">Buscar</button>
-				<button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="button" id="btn-teste" name="btn-teste">Teste</button>
+				<input class="form-control form-control-sm mr-sm-2" type="search"  
+					name="txtbuscar" id="txtbuscar" placeholder="Buscar pelo nome" aria-label="Search">
+				<button class="btn btn-outline-info btn-sm my-2 my-sm-0 d-none d-md-block" type="submit" id="btn-buscar" name="btn-buscar">Buscar</button>
 			</form>
 		</div>
 		<div id="listar">
 			
 		</div>
 	</div>
+	 <footer class="border-top fixed-bottom text-muted bg-light" >
+		<div class="container">
+			<div class="row py-3">
+	    		<div class="col-12 col-md-4 text-center" >
+	    			&copy; 2021 - Esmalteria PWE  
+	    		</div>
+	    		<div class="col"> Caio Soares Paiva | GU3011143</div>
+	    		<div class="col"> Josefa Gidaiane Santana De Jesus | GU3011976</div>
+	    		<div class="col"> Mayara Sarmento Paes | GU3012654 </div>
+	  	</div>
+	  </div>
+	</footer>
+ 
 </body>
 </html>
 
+<!-- AJAX BUSCAR DADOS-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url: "ajax/listar.jsp",
+			type: "GET",	
+			data: $('#frm').serialize(),
+			dataType: "html",
+			success: function(result){
+				$('#listar').html(result);
+				//console.log(response);
+			}
+		})	
+	})
+</script>
 
+
+<!-- AJAX BUSCAR DADOS-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn-buscar").click(function(event){
+			event.preventDefault();
+			$.ajax({
+				url: "ajax/listar.jsp",
+				method: "post",	
+				data: $('form').serialize(),
+				dataType: "html",
+				success: function(result){
+					$('#listar').html(result);
+					//console.log(response);
+				}
+			})	
+		})
+			
+	})
+</script>
+
+<!-- AJAX PARA BUSCAR DADOS PELA TXT -->
+<script type="text/javascript">
+	$("#txtbuscar").keyup(function(){
+		$('#btn-buscar').click();
+	})		
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1"
@@ -189,6 +226,7 @@
 					<div class="form-group">
 						<label for="txtnivel">Nível Usuário</label> <select
 							class="form-control" name="txtnivel" id="txtnivel" required>
+						<option value=""></option>
 							<option value="<%=xnivel %>"><%= xnivel.equals("1") ? "Admin" : "Comum"%></option> 
 							<%
 								if(xnivel.equals("1")){
@@ -243,6 +281,7 @@
 %>
 
 
+<!-- Delete User -->
 <%
 
 	if(request.getParameter("funcao") != null && request.getParameter("funcao").equals("excluir")){
@@ -312,6 +351,8 @@
 
 	}
 %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
 
 
