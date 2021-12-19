@@ -56,7 +56,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Página inicial</a></li>
+						aria-current="page" href="view/Index.jsp">Página inicial</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -81,7 +81,7 @@
  		response.sendRedirect("login.jsp");
  	}
  %>
-					</small></span> <a href="logout.jsp"><i class="fas fa-sign-out-alt ml-1"></i></a>
+					</small></span> <a href="view/logout.jsp"><i class="fas fa-sign-out-alt ml-1"></i></a>
 				</form>
 			</div>
 		</div>
@@ -100,6 +100,19 @@
 			
 		</div>
 	</div>
+	 <footer class="border-top fixed-bottom text-muted bg-light" >
+		<div class="container">
+			<div class="row py-3">
+	    		<div class="col-12 col-md-4 text-center" >
+	    			&copy; 2021 - Esmalteria PWE  
+	    		</div>
+	    		<div class="col"> Caio Soares Paiva | GU3011143</div>
+	    		<div class="col"> Josefa Gidaiane Santana De Jesus | GU3011976</div>
+	    		<div class="col"> Mayara Sarmento Paes | GU3012654 </div>
+	  	</div>
+	  </div>
+	</footer>
+ 
 </body>
 </html>
 

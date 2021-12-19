@@ -1,8 +1,6 @@
 package config;
 
 import java.sql.*;
-import com.mysql.jdbc.Driver;
-
 public class Conexao {
 
 	public Connection conectar() throws SQLException {

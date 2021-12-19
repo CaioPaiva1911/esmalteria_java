@@ -58,7 +58,7 @@ $('#efetuarLogin').click(function(e) {
 		<!-- Remind Passowrd -->
 		<div id="formFooter">
 			<a class="underlineHover text-left" href="#">Esqueceu sua senha?</a>
-			<a class="underlineHover text-info text-right" href="cadastrUsuario.jsp">Cadastra-se</a>
+			<a class="underlineHover text-info text-right" href="cadastroUsuario.jsp">Cadastra-se</a>
 		</div>
 		<p align="center" id="retorno" class="text-alert mt-2">
 			<%

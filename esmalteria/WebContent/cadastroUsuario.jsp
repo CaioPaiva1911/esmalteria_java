@@ -32,7 +32,7 @@
 
 </head>
 <body>
-
+<div class="container-fluid">
 <form method="POST" class="form-horizontal" id="frmUsuarios">
 	<h3>Cadastro de Usuário:</h3>
 	<div class="form-group">
@@ -132,6 +132,7 @@
 	<button type="button" id="btnDeletar" class="btn btn-primary">Excluir</button>	
 	
 </form>
+</div>
 </body>
 
 <script>
