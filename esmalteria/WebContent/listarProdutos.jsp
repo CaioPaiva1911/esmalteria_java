@@ -16,6 +16,16 @@
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: gray">
+			<div class="align-self-end">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="view/Index.jsp" class="nav-link text-white">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="<%=request.getContextPath()%>/listarproduto"class=" nav-link text-white">Listar Produto</a>
+						</li>
+					</ul>
+				</div>
 
 			<ul class="navbar-nav">
 				<li><a href="<%=request.getContextPath()%>/listarproduto"
