@@ -1,3 +1,9 @@
+<style>
+	a{
+		color: white;
+	}
+</style>
+
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -7,27 +13,40 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  
- <nav class="navbar navbar-dark bg-dark">
-<nav class="navbar navbar-expand-lg navbar-darker">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>	
+ 
+<body style= "min-width: 372px;">
+	<nav class="navbar navbar-expand-lg navbar-dark  border-bottom shadow-sm mb-3" style= "background-color: black; color; white">
+		<div class="container">
+	  		<a class="navbar-brand" href="#">Esmalteria</a>
+	 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+	 			<span class="navbar-toggler-icon"></span>
+	 		</button>
+			<div class="navbar-collapse collapse">
+				<ul class="navbar-nav flex-grow-1">
+					<li class="nav-item">
+						<a href="#" class="nav-link text-white">item1 </a>
+					</li>
+		 
+					<li class="nav-item">
+						<a href="#" class="nav-link text-white"> item2 </a>
+					</li>
+					
+					<li class="nav-item">
+						<a href="#" class="nav-link text-white">item3 </a>
+					</li>
+				</ul>
+			</div>
+				<div class="align-self-end">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="#" class="nav-link text-white">Entrar</a>
+						</li>
+						<li class="nav-item">
+							<href="#" class="nav-link text-white">Cadastrar-se</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 </nav>
+</body>

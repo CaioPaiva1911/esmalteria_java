@@ -8,15 +8,13 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
  
- <footer class="text-center text-white fixed-bottom" style="background-color:black;">
-  <!-- Grid container -->
-  <div class="container p-4"></div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-  <div class="text-center p-3" >
-    © 2020 Copyright:  
-    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-</footer>
+	 <footer class="border-top fixed-bottom text-muted bg-light" >
+		<div class="container">
+			<div class="row py-3">
+	    		<div class="col-12 col-md-4 text-center" style="text-center">
+	    			&copy; 2021 - Esmalteria PWE
+	    		</div>
+	 	 	</div>
+	  	</div>
+	</footer>
+ 
