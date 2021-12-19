@@ -24,17 +24,25 @@
 <title>Produtos</title>
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-				style="background-color: gray">
-			<ul class="navbar-nav">
-				<li><a href="<%=request.getContextPath()%>/listarproduto"
-							class="nav-link">Produtos</a>
-				</li>
-			</ul>
-		</nav>
-	</header>
-	
+<header>
+ <nav class="navbar navbar-expand-lg navbar-dark  border-bottom shadow-sm mb-3" style= "background-color: black;">
+		<div class="container">
+	  		<a class="navbar-brand" href="">Esmalteria</a>
+	 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+	 			<span class="navbar-toggler-icon"></span>
+ 	</button>
+ 	
+ 	<div class="align-self-end">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="view/Index.jsp" class="nav-link text-white">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="../listarProdutos.jsp"class=" nav-link text-white">Listar Produto</a>
+						</li>
+					</ul>
+				</div>
+</header>	
 		<div class="container col-md-5">
 		<div class="card">
 			<div class="card-body">
@@ -109,6 +117,23 @@
 			</div>
 		</div>
 	</div>
-
-
+	
+<footer class="text-muted bg-light">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="css/footer.css" rel="stylesheet">	 
+		<hr class="mt-6">
+		<div class="row pb-2">
+			<div class="col-12"></div>
+		 
+				<div class="container">
+					<div class="row py-1">
+						<div class=" col-md-4 text-center">&copy; 2021 -
+							Esmalteria PWE</div>
+						<div class="row py-1  col-md-4 text-center">Caio Soares Paiva GU3011143<br>  
+							Josefa	Gidaiane Santana De Jesus GU3011976 <br>
+							 Mayara Sarmento Paes GU3012654</div>
+					</div>
+				</div> 
+			</div>
+	</footer>
 </html>
