@@ -14,21 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ProdutoDAO;
 import model.Produtos;
 
-/**
- * Servlet implementation class ProdutoController
- */
-@WebServlet("/ProdutoController")
+
+@WebServlet("/")
 public class ProdutoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProdutoDAO produtoDAO;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProdutoController() {
-        this.produtoDAO = new ProdutoDAO();
+	
+    public void init() {
+    	this.produtoDAO = new ProdutoDAO();
+	}
         
-    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		this.doGet(request, response);
@@ -37,23 +33,46 @@ public class ProdutoController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acao = request.getServletPath();
+
 		
 		switch(acao) {
-		case "/inserirProduto":
-			inserirProduto(request, response);
+		case "/novo":
+			formNovoProduto(request, response);
 			break;
-		case "/deletarProduto":
-			
+		case "/inserirProduto":
 			try {
-				deletarProduto(request, response);
-			} catch (ServletException | IOException | SQLException e) {
+				inserirProduto(request, response);
+			} catch (ServletException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			
 			break;
-		case "/atualizarProduto":
+		case "/deletar":
+			try {
+				deletarProduto(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "/atualizar":
 			atualizarProduto(request, response);
+			break;
+		case "/editar":
+			editarProduto(request, response);
 			break;
 		case "/listarproduto":
 			ListProdutos(request, response);
@@ -63,12 +82,48 @@ public class ProdutoController extends HttpServlet {
 	private void ListProdutos (HttpServletRequest request, HttpServletResponse response)
 			 throws ServletException, IOException {
 		List<Produtos> listarproduto = ProdutoDAO.ListAllProdutos();
-		request.setAttribute("listarproduto", listarproduto);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listaProdutos.jsp");
+		request.setAttribute("listarProduto", listarproduto);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listarProdutos.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void inserirProduto(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException, SQLException {
+	
+		String fabricante = request.getParameter("fabricante");
+		String nome = request.getParameter("nome");
+		String marca = request.getParameter("marca");
+		int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
+		String descricao = request.getParameter("descricao");
+		String unidadeMedida = request.getParameter("unidadeMedida");
+		double peso = Double.parseDouble(request.getParameter("peso"));
+		String cor = request.getParameter("cor");
+		Produtos novoProd = new Produtos(fabricante, nome, marca,idCategoria,
+				descricao, unidadeMedida, peso, cor);	
+		produtoDAO.inserirProduto(novoProd);
+		response.sendRedirect("listarproduto");
+	}
+	private void deletarProduto(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException, SQLException {
+		int idProduto = Integer.parseInt(request.getParameter("idProduto"));
+		produtoDAO.deletarProduto(idProduto);
+		response.sendRedirect("listarproduto");
+	}
+	private void formNovoProduto(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroProduto.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void editarProduto(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("idProduto"));
+		Produtos existeProd = produtoDAO.selecionarProd(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroProduto.jsp");
+		request.setAttribute("produto", existeProd);
+		dispatcher.forward(request, response);
+	}
+	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
 			 throws ServletException, IOException {
 		int idProduto = Integer.parseInt(request.getParameter("idProduto"));
 		String fabricante = request.getParameter("fabricante");
@@ -79,38 +134,15 @@ public class ProdutoController extends HttpServlet {
 		String unidadeMedida = request.getParameter("unidadeMedida");
 		double peso = Double.parseDouble(request.getParameter("peso"));
 		String cor = request.getParameter("cor");
-		Produtos novoProd = new Produtos(idProduto, fabricante, nome, marca, idCategoria,
-				descricao, unidadeMedida, peso, cor);	
-	}
-	private void deletarProduto(HttpServletRequest request, HttpServletResponse response)
-			 throws ServletException, IOException, SQLException {
-		int id = Integer.parseInt(request.getParameter("idProduto"));
-		produtoDAO.deletarProduto(id);
-		response.sendRedirect("listarproduto");
-	}
-/*	private void editarProduto(HttpServletRequest request, HttpServletResponse response)
-			 throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("idProduto"));
-		Produtos existeProd = produtoDAO.selecionarProd("idProduto");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroProduto.jps");
-		request.setAttribute("produto", existeProd);
-		dispatcher.forward(request, response);
-	}*/
-	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
-			 throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("idProduto"));
-		//String idProduto = request.getParameter("idProduto");
-		String fabricante = request.getParameter("fabricante");
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
-		String descricao = request.getParameter("descricao");
-		String unidadeMedida = request.getParameter("unidadeMedida");
-		double peso = Double.parseDouble(request.getParameter("peso"));
-		String cor = request.getParameter("cor");
-		Produtos produto = new Produtos(fabricante, nome, idCategoria, marca,
+		Produtos produto = new Produtos(idProduto, fabricante, nome, marca,idCategoria,
 				descricao, unidadeMedida, peso, cor);
-		response.sendRedirect("listarproduto");
+		try {
+			produtoDAO.atualizarProduto(produto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("listarProdutos");
 	}
 }
 	

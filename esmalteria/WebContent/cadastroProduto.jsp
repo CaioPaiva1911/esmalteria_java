@@ -21,44 +21,94 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <link href="css/estilos.css" rel="stylesheet">
-<title>View Produtos</title>
+<title>Produtos</title>
 </head>
 <body>
-		<h1>Listagem de Produtos</h1>
-	<%
-		List<Produtos> list = ProdutoDAO.getAllProdutos();
-		request.setAttribute("list", list);
-	%>
- 	<table border="1">
-		<tr> 
-			<th> ID </th> 
-			<th> Fabricante </th> 
-			<th> Nome </th>
-			<th> Marca </th>  
-			<th> ID Categoria </th> 
-			<th> Descrição </th>
-			<th> Medida </th>  
-			<th> Peso </th> 
-			<th> Cor </th> 
-		</tr>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark"
+				style="background-color: gray">
+			<ul class="navbar-nav">
+				<li><a href="<%=request.getContextPath()%>/listarproduto"
+							class="nav-link">Produtos</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
 	
-	</table>
-	 	<c:forEach items="${list}" var="produto">
-			<tr>
-				<td>${produto.getIdProduto()}</td>
-				<td>${produto.getFabricante()}</td>
-				<td>${produto.getNome()}</td>
-				<td>${produto.getMarca()}</td>
-				<td>${produto.getIdCategoria()}</td>
-				<td>${produto.getDescricao()}</td>
-				<td>${produto.getUnidadeMedida()}</td>
-				<td>${produto.getPeso()}</td>
-				<td>${produto.getCor()}</td>
+		<div class="container col-md-5">
+		<div class="card">
+			<div class="card-body">
+				<c:if test="${produto != null}">
+					<form action="atualizarProduto" method="post">
+				</c:if>
+				<c:if test="${produto == null}">
+					<form action="inserirProduto" method="post">
+				</c:if>
+
+				<caption>
+					<h2>
+						<c:if test="${produto != null}">
+            			Editar
+            		</c:if>
+						<c:if test="${produto == null}">
+            			Adicionar
+            		</c:if>
+					</h2>
+				</caption>
+
+				<c:if test="${produto != null}">
+					<input type="hidden" name="idProduto" value="<c:out value='${produto.idProduto}' />" />
+				</c:if>
+
+				<fieldset class="form-group">
+					<label>Fabricante</label> <input type="text"
+						value="<c:out value='${produto.fabricante}' />" class="form-control"
+						name="fabricante" required="required">
+				</fieldset>
+
+				<fieldset class="form-group">
+					<label>Nome</label> <input type="text"
+						value="<c:out value='${produto.nome}' />" class="form-control"
+						name="nome">
+				</fieldset>
+
+				<fieldset class="form-group">
+					<label>Marca</label> <input type="text"
+						value="<c:out value='${produto.marca}' />" class="form-control"
+						name="marca">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Id Categoria</label> <input type="text" 
+						value="<c:out value='${produto.idCategoria}' />" class="form-control"
+						name="idCategoria">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Descrição</label> <input type="text"
+						value="<c:out value='${produto.descricao}' />" class="form-control"
+						name="descricao">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Unidade medida</label> <input type="text" 
+						value="<c:out value='${produto.unidadeMedida}' />" class="form-control"
+						name="unidadeMedida">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Peso</label> <input type="text"
+						value="<c:out value='${produto.peso}' />" class="form-control"
+						name="peso">
+				</fieldset>
 				
-			</tr>
-		</c:forEach> 
-	<form>
-	</form>
-<head>
-</head>
+				<fieldset class="form-group">
+					<label>Cor</label> <input type="text"
+						value="<c:out value='${produto.cor}' />" class="form-control"
+						name="cor">
+				</fieldset>
+
+				<button type="submit" class="btn btn-success">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
 </html>
