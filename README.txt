@@ -5,7 +5,7 @@ Mayara Sarmento Paes Prontuário: GU3012654
 Josefa Gidaiane Santana De Jesus Prontuário: GU3011976
 
 
-Limk repositório:
+Link repositório:
 https://github.com/CaioPaiva1911/esmalteria_java
 
 Link do vídeo:
