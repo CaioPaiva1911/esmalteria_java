@@ -17,7 +17,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
   <a href="#Integrantes"> Integrantes </a>
 </p>
   
-## Integrantes
+## 👉 Integrantes
 Caio Soares Paiva Prontuário: GU3011143
 Mayara Sarmento Paes Prontuário: GU3012654
 Josefa Gidaiane Santana De Jesus Prontuário: GU3011976
