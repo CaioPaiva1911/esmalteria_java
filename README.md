@@ -1,15 +1,14 @@
 Documentação final do Projeto de PWE
 
-<h1 align="center"> Esmalteria </h1>
-
 <p align="center">
   <a href="#objetivo"> Objetivo </a> 
   <a href="#ferramentas"> Tecnologias </a>
   <a href="#Integrantes"> Integrantes </a>
 </p>
 
-<p align="center" class="#objetivo">Projeto de esmalteria desenvolvido em Java para venda de produtos relacionados a pedicure e manicure</p>
+<h1 align="center"> Esmalteria </h1>
 
+<p align="center" class="#objetivo">Projeto de esmalteria desenvolvido em Java para venda de produtos relacionados a pedicure e manicure</p>
 
 ## 🛠️ Tecnologias
 As seguintes tecnologias foram usadas na construção do projeto:
