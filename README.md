@@ -16,6 +16,11 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - Ajax
 - Servlet
 - Eclipse
+
+## Como usar
+Antes de começar, é preciso ter um editor para trabalhar com o código instalado em sua máquina.
+# Clone este repositório
+
   
 ## 👉 Integrantes
 Caio Soares Paiva Prontuário: GU3011143
